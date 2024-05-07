@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "payments"
+version = "0.1.0"
+description = ""
+authors = ["Anthony A <arcimavic@gmail.com>"]
+package-mode = false
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+uvicorn = "^0.29.0"
+fastapi = "^0.110.2"
+psycopg2-binary = "^2.9.9"
+sqlalchemy = "^2.0.29"
+python-jose = { extras = ["cryptography"], version = "^3.3.0" }
+passlib = { extras = ["bcrypt"], version = "^1.7.4" }
+python-dotenv = "^1.0.1"
+pydantic-settings = "^2.2.1"
+pydantic = "^2.7.0"
+python-multipart = "^0.0.9"
+celery = "^5.4.0"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.1.0"
+mypy = "^1.9.0"
+isort = "^5.13.2"
+black = "^24.4.0"
+celery-types = "^0.22.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
