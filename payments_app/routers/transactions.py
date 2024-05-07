@@ -25,7 +25,7 @@ class Tags(Enum):
 @router.get(
     "",
     tags=[Tags.transactions],
-    # dependencies=[Depends(get_current_active_user)],
+    dependencies=[Depends(get_current_active_user)],
 )
 async def transactions_list(db: Session = Depends(get_db)):
     return get_all_transactions(db)
@@ -34,7 +34,7 @@ async def transactions_list(db: Session = Depends(get_db)):
 @router.get(
     "/{transaction_id}",
     tags=[Tags.transactions],
-    # dependencies=[Depends(get_current_active_user)],
+    dependencies=[Depends(get_current_active_user)],
 )
 async def transaction_detail(
     db: Session = Depends(get_db),
@@ -47,7 +47,7 @@ async def transaction_detail(
     "",
     tags=[Tags.transactions],
     status_code=201,
-    # dependencies=[Depends(get_current_active_user)],
+    dependencies=[Depends(get_current_active_user)],
 )
 async def create_transaction(
     transaction: TransactionCreate,
