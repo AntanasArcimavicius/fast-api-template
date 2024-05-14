@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
@@ -9,41 +9,42 @@ services:
       POSTGRES_PASSWORD: db_password
       POSTGRES_DB: payments_db
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
   app:
     build: .
-    restart: always 
+    restart: always
     ports:
       - 8000:8000
     depends_on:
       - db
     env_file:
       - .env
-    volumes: 
+    volumes:
       - ./payments_app:/code/payments_app
+      - ./tests:/code/tests
 
   rabbitmq:
-    image: rabbitmq:3.11-management-alpine 
+    image: rabbitmq:3.11-management-alpine
     ports:
-      - '5672:5672'
-      - '15672:15672'
+      - "5672:5672"
+      - "15672:15672"
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
 
   worker:
     build: .
-    restart: always  
-    depends_on: 
+    restart: always
+    depends_on:
       - rabbitmq
     env_file:
       - .env
-    volumes: 
+    volumes:
       - ./payments_app:/code/payments_app
-    command: celery -A payments_app.tasks worker -l info 
+    command: celery -A payments_app.tasks worker -l info
 
 volumes:
-  postgres_data: 
+  postgres_data:
